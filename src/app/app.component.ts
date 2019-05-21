@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { MessageService } from './services/message.service'
 
 @Component({
   selector: 'app-root',
@@ -8,18 +9,15 @@ import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 })
 export class AppComponent implements OnInit {
   title = 'ts-websocket';
-  ws: WebSocketSubject<any>;
 
-  constructor() {
-    this.ws = webSocket({
-      url: 'ws://localhost:8080/ws'
-    });
+  constructor(private messageService: MessageService) {
+    this.messageService.connect();
   }
 
   ngOnInit(): void {
-    this.ws.subscribe(data => {
+    this.messageService.receive().subscribe(data => {
       console.log(data);
-    });
+    })
   }
 
 
