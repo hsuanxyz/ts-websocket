@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { Receive, Send } from './interfaces/message'
 import { MessageService } from './services/message.service'
 
 @Component({
@@ -15,9 +15,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.messageService.receive().subscribe(data => {
+    this.messageService.receive(Receive.CONNECT).subscribe(data => {
       console.log(data);
     })
+    this.messageService.receive(Receive.USER_LIST).subscribe(data => {
+      console.log(data);
+    })
+    this.messageService.send<Send.JOINED>(Send.JOINED, 'test')
+    this.messageService.send<Send.GET_USER_LIST>(Send.GET_USER_LIST)
   }
 
 

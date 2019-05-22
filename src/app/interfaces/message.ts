@@ -13,16 +13,13 @@ export enum Send {
   GET_USER_LIST = 'GET_USER_LIST'
 }
 
-export interface User extends String {
-  prototype: String
-}
+export type User = string;
 
 export interface ChatMessage {
   form: User;
   content: string;
   time: number;
 }
-
 
 export interface MessageReceiveData {
   [Receive.CONNECT]: never;
@@ -32,7 +29,7 @@ export interface MessageReceiveData {
 
 export interface MessageSendData {
   [Send.MESSAGE]: ChatMessage;
-  [Send.GET_USER_LIST]: undefined;
+  [Send.GET_USER_LIST]: never;
   [Send.JOINED]: User;
   [Send.LEFT]: User;
   [Send.RENAME]: {
