@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageListenersManager } from './core/decorators/message-listeners-manager'
 import { Receive, Send } from './interfaces/message'
 import { MessageService } from './services/message.service'
 
+@MessageListenersManager<AppComponent>()
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,6 +14,7 @@ export class AppComponent implements OnInit {
 
   constructor(private messageService: MessageService) {
     this.messageService.connect();
+    console.log(this)
   }
 
   ngOnInit(): void {
