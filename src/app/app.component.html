@@ -1,0 +1,37 @@
+<nz-layout>
+  <nz-sider
+    nzCollapsible
+    [(nzCollapsed)]="isCollapsed"
+    [nzCollapsedWidth]="0"
+    [nzTrigger]="null"
+  >
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <span class="trigger">
+         <i
+           nz-icon
+           [type]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+           (click)="isCollapsed = !isCollapsed"
+         ></i>
+      </span>
+      <h4 class="title">Typescript Websocket</h4>
+      <span class="rename">
+        <nz-avatar [nzText]="username[0]"></nz-avatar>
+      </span>
+    </nz-header>
+    <nz-content>
+      <div class="main">
+        <div class="message-list"></div>
+        <div class="message-input">
+          <nz-input-group [nzSuffix]="suffixIconSearch">
+            <input type="text" nz-input placeholder="Message" />
+          </nz-input-group>
+          <ng-template #suffixIconSearch>
+            <i nz-icon type="icon:plane"></i>
+          </ng-template>
+        </div>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
