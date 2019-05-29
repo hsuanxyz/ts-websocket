@@ -22,7 +22,13 @@
     </nz-header>
     <nz-content>
       <div class="main">
-        <div class="message-list"></div>
+        <div class="message-list">
+          <app-message-item [outgoing]="true"></app-message-item>
+          <app-message-item></app-message-item>
+          <app-message-item [outgoing]="true"></app-message-item>
+          <app-message-item></app-message-item>
+          <app-message-item [outgoing]="true"></app-message-item>
+        </div>
         <div class="message-input">
           <nz-input-group [nzSuffix]="suffixIconSearch">
             <input type="text" nz-input placeholder="Message" />

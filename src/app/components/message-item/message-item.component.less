@@ -1,0 +1,40 @@
+:host {
+  display: flex;
+  padding: 0 24px;
+  margin: 20px 0;
+
+  &.outgoing {
+    flex-direction: row-reverse;
+    .message-content {
+      background: #d2e3fc;
+      color: #174ea6;
+      margin: 0 10px;
+      margin-left: 42px;
+    }
+    .message-relative-time {
+      color: #577aaf;
+      text-align: right;
+    }
+
+  }
+
+  .message-avatar {
+    flex: none;
+  }
+
+  .message-content {
+    flex: 1;
+    margin: 0 10px;
+    margin-right: 42px;
+    padding: 10px;
+    background: #fff;
+    border-radius: 10px;
+  }
+
+  .message-relative-time {
+    display: block;
+    margin: 0 10px;
+    margin-top: 5px;
+    color: #999;
+  }
+}
