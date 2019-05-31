@@ -9,13 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { MessageItemComponent } from './components/message-item/message-item.component';
+import { UserItemComponent } from './components/user-item/user-item.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    MessageItemComponent
+    MessageItemComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,

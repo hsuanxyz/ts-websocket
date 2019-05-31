@@ -15,6 +15,24 @@ const planeSvg = `<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//
 export class AppComponent extends MessageListenersManager implements OnInit {
   isCollapsed = false;
   username = 'Username'
+  userList = [
+    {
+      username: 'HanMeimei',
+      lastMessage: {
+        form: 'HanMeimei',
+        content: 'Hello！My name isHan Meimei Hello！My name isHan Meime',
+        time: Date.now()
+      }
+    },
+    {
+      username: 'LiLei',
+      lastMessage: {
+        form: 'LiLei',
+        content: 'Hello！My name isHan Meimei',
+        time: Date.now()
+      }
+    }
+  ]
   constructor(public messageService: MessageService, private iconService: NzIconService) {
     super(messageService);
     this.iconService.addIconLiteral('icon:plane', planeSvg);

@@ -1,5 +1,28 @@
+nz-sider {
+  border-right: 1px solid #eee;
+}
+
 nz-layout {
   height: 100vh;
+
+  nz-header {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: calc(100vw - 300px);
+  }
+
+  .message-input {
+    position: fixed;
+    bottom: 0;
+    width: calc(100vw - 300px);
+  }
+
+  &.collapsed {
+    nz-header,.message-input {
+      width: 100%;
+    }
+  }
 }
 
 nz-header {
@@ -8,6 +31,9 @@ nz-header {
   display: flex;
   font-size: 16px;
   padding: 0 24px;
+  .header-wrap {
+    position: relative;
+  }
   .trigger, .rename {
     flex: none;
     cursor: pointer;
@@ -31,13 +57,15 @@ nz-header {
   flex-direction: column;
 
   .message-list {
+    margin-top: 64px;
+    margin-bottom: 32px;
     flex: 1 auto;
   }
 
   .message-input {
     flex: none;
-    height: 32px;
-    margin: 10px;
+    height: 40px;
+    background: #fff;
     input {
       border-radius: 0;
       background: transparent;

@@ -1,0 +1,39 @@
+:host {
+  display: block;
+  margin: 24px 10px;
+  .user-item {
+    display: flex;
+
+    .user-avatar {
+      flex: none;
+    }
+    .user-info {
+      flex: 1 auto;
+      margin-left: 10px;
+    }
+
+    .info-message {
+      color: #999999;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+      margin: 0;
+      width: 200px;
+    }
+
+    .info-username {
+      height: 24px;
+      line-height: 24px;
+      display: flex;
+      .username {
+        font-weight: 500;
+        font-size: 16px;
+        flex: 1 auto;
+      }
+      .relative-item {
+        flex: 0 auto;
+        color: #999999;
+      }
+    }
+  }
+}

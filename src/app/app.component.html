@@ -1,19 +1,27 @@
 <nz-layout>
   <nz-sider
     nzCollapsible
+    nzTheme="light"
+    [nzWidth]="300"
     [(nzCollapsed)]="isCollapsed"
     [nzCollapsedWidth]="0"
     [nzTrigger]="null"
   >
+    <div class="user-list">
+      <app-user-item *ngFor="let user of userList"
+        [lastMessage]="user.lastMessage"
+        [username]="user.username">
+      </app-user-item>
+    </div>
   </nz-sider>
-  <nz-layout>
+  <nz-layout [class.collapsed]="isCollapsed">
     <nz-header>
       <span class="trigger">
-         <i
-           nz-icon
-           [type]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
-           (click)="isCollapsed = !isCollapsed"
-         ></i>
+       <i
+         nz-icon
+         [type]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+         (click)="isCollapsed = !isCollapsed"
+       ></i>
       </span>
       <h4 class="title">Typescript Websocket</h4>
       <span class="rename">
@@ -28,9 +36,12 @@
           <app-message-item [outgoing]="true"></app-message-item>
           <app-message-item></app-message-item>
           <app-message-item [outgoing]="true"></app-message-item>
+          <app-message-item [outgoing]="true"></app-message-item>
+          <app-message-item [outgoing]="true"></app-message-item>
+          <app-message-item></app-message-item>
         </div>
         <div class="message-input">
-          <nz-input-group [nzSuffix]="suffixIconSearch">
+          <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="large">
             <input type="text" nz-input placeholder="Message" />
           </nz-input-group>
           <ng-template #suffixIconSearch>
