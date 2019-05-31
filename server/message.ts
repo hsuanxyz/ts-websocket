@@ -3,30 +3,16 @@ export enum MessageType {
   LEFT = 'LEFT',
   RENAME = 'RENAME',
   MESSAGE = 'MESSAGE',
-  GET_USER_LIST = 'GET_USER_LIST'
-}
-
-export enum ServerMessageType {
+  GET_USER_LIST = 'GET_USER_LIST',
   CONNECT = 'CONNECT',
   USER_LIST = 'USER_LIST'
-}
-
-export interface User {
-  username: string;
-  avatar: string;
-}
-
-export interface MessageData {
-  form: string;
-  content: string;
-  time: number;
 }
 
 export class Message {
   type: string;
   data: any;
 
-  constructor(type: string, data?: any) {
+  constructor(type: MessageType, data?: any) {
     this.type = type;
     this.data = data;
   }
