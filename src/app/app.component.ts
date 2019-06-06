@@ -111,7 +111,7 @@ export class AppComponent extends MessageListenersManager implements OnInit {
     }
   }
 
-  @MessageListener(Receive.LEFT)
+  @MessageListener(Receive.LEAVE)
   removeUser(user: User) {
     this.userList = this.userList.filter(e => e.username !== user);
   }

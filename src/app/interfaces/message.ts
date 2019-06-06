@@ -4,7 +4,7 @@ export enum Receive {
   USER_LIST = 'USER_LIST',
   MESSAGE = 'MESSAGE',
   JOINED = 'JOINED',
-  LEFT = 'LEFT',
+  LEAVE = 'LEAVE',
   RENAME = 'RENAME',
 }
 
@@ -16,13 +16,6 @@ export enum Send {
   GET_USER_LIST = 'GET_USER_LIST'
 }
 
-export type User = string;
-
-export interface ChatMessage {
-  form: User;
-  content: string;
-  time: number;
-}
 
 type DataType<T extends (Send | Receive)> = T extends Send ? MessageSendData[Send] : MessageReceiveData[Receive];
 
@@ -36,11 +29,8 @@ export interface MessageReceiveData {
   [Receive.USER_LIST]: User[];
   [Receive.MESSAGE]: ChatMessage
   [Receive.JOINED]: User;
-  [Receive.LEFT]: User;
-  [Receive.RENAME]: {
-    user: User;
-    newName: User;
-  };
+  [Receive.LEAVE]: User;
+  [Receive.RENAME]: Rename;
 }
 
 export interface MessageSendData {
@@ -48,8 +38,18 @@ export interface MessageSendData {
   [Send.GET_USER_LIST]: never;
   [Send.JOINED]: User;
   [Send.LEAVE]: User;
-  [Send.RENAME]: {
-    user: User;
-    newName: User;
-  };
+  [Send.RENAME]: Rename
+}
+
+export type User = string;
+
+export interface ChatMessage {
+  form: User;
+  content: string;
+  time: number;
+}
+
+export interface Rename {
+  user: User;
+  newName: User;
 }
