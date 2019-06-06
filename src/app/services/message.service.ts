@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs'
-import { filter } from 'rxjs/operators'
+import { filter, map } from 'rxjs/operators'
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket'
 import { SendArgumentsType } from '../core/message-ts-util'
 import { MessageReceiveData, MessageSendData} from '../interfaces/message'
@@ -24,7 +24,8 @@ export class MessageService {
 
   receive<K extends keyof MessageReceiveData>(type: K): Observable<MessageReceiveData[K]> {
     return this.received$.pipe(
-      filter(message => message.type === type)
+      filter(message => message.type === type),
+      map(message => message.data)
     ) as Observable<MessageReceiveData[K]>
   }
 

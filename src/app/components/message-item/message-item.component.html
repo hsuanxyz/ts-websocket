@@ -1,17 +1,10 @@
-<nz-avatar class="message-avatar" [nzText]="'D'"></nz-avatar>
+<nz-avatar class="message-avatar" [nzText]="message.form[0]"></nz-avatar>
 <div>
   <div class="message-content">
-    Hello！My name isHan Meimei
-    Hello！My name isHan Meimei
-    Hello！My name isHan Meimei
-    Hello！My name isHan Meimei
-    Hello！My name isHan Meimei
-    Hello！My name isHan Meimei
-    Hello！My name isHan Meimei
-    Hello！My name isHan Meimei
+    {{message.content}}
   </div>
   <small class="message-relative-time">
-    less than a minute
+    {{message.time | date}}
   </small>
 </div>
 

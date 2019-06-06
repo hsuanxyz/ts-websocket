@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { NzIconService } from 'ng-zorro-antd'
+import { Component, HostListener, OnInit } from '@angular/core';
+import { NzIconService, NzModalService } from 'ng-zorro-antd'
+import { UsernameModalComponent } from './components/username-modal/username-modal.component'
 import { MessageListener } from './core/message-listeners'
 import { MessageListenersManager } from './core/message-listeners-manager'
 import { ChatMessage, Receive, Send, User } from './interfaces/message'
@@ -19,25 +20,80 @@ export class AppComponent extends MessageListenersManager implements OnInit {
   username = 'Username'
   userList: { username: User, lastMessage?: ChatMessage }[] = [];
   messages: ChatMessage[] = [];
-  constructor(public messageService: MessageService, private iconService: NzIconService) {
+  messageContent = '';
+  constructor(public messageService: MessageService,
+              private iconService: NzIconService,
+              private nzModalService: NzModalService) {
     super(messageService);
     this.iconService.addIconLiteral('icon:plane', planeSvg);
     this.messageService.connect();
   }
 
   ngOnInit(): void {
-    this.messageService.send<Send.JOINED>(Send.JOINED, 'test')
-    this.messageService.send<Send.GET_USER_LIST>(Send.GET_USER_LIST)
+
+  }
+
+  @HostListener('window:beforeunload')
+  left() {
+    this.messageService.send(Send.LEFT, this.username)
+  }
+
+  openUsernameModal(rename = false) {
+    const modalRef = this.nzModalService.create({
+      nzContent: UsernameModalComponent,
+      nzTitle: 'Username',
+      nzFooter: null
+    });
+
+    modalRef.afterClose.subscribe(username => {
+      if (rename) {
+        this.rename(username)
+      } else {
+        this.join(username);
+      }
+    })
+  }
+
+  join(username: string) {
+    this.username = username;
+    this.messageService.send<Send.JOINED>(Send.JOINED, this.username);
+    this.addUser(username);
+  }
+
+  rename(username: string) {
+    const data = {
+      user: this.username,
+      newName: username
+    };
+    this.messageService.send<Send.RENAME>(Send.RENAME, data);
+    this.username = username;
+    this.renameUser(data);
+  }
+
+  sendMessage() {
+    if (this.messageContent) {
+      const message = {
+        form: this.username,
+        content: this.messageContent,
+        time: Date.now()
+      };
+      this.messageService.send<Send.MESSAGE>(Send.MESSAGE, message);
+      this.addMessage(message);
+      this.messageContent = '';
+    }
   }
 
   @MessageListener(Receive.CONNECT)
   onConnect() {
-    console.log('CONNECT')
+    this.messageService.send<Send.GET_USER_LIST>(Send.GET_USER_LIST);
+    this.openUsernameModal();
   }
 
   @MessageListener(Receive.MESSAGE)
   addMessage(message: ChatMessage) {
     this.messages = [...this.messages, message];
+    this.userList = this.userList.filter(user => user.username !== message.form);
+    this.userList = [ { username: message.form, lastMessage: message }, ...this.userList ];
   }
 
   @MessageListener(Receive.USER_LIST)

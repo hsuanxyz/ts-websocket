@@ -31,18 +31,16 @@
     <nz-content>
       <div class="main">
         <div class="message-list">
-          <app-message-item [outgoing]="true"></app-message-item>
-          <app-message-item></app-message-item>
-          <app-message-item [outgoing]="true"></app-message-item>
-          <app-message-item></app-message-item>
-          <app-message-item [outgoing]="true"></app-message-item>
-          <app-message-item [outgoing]="true"></app-message-item>
-          <app-message-item [outgoing]="true"></app-message-item>
-          <app-message-item></app-message-item>
+          <app-message-item
+            *ngFor="let message of messages"
+            [message]="message"
+            [outgoing]="message.form === username"></app-message-item>
         </div>
         <div class="message-input">
           <nz-input-group [nzSuffix]="suffixIconSearch" nzSize="large">
-            <input type="text" nz-input placeholder="Message" />
+            <input type="text" nz-input placeholder="Message"
+              [(ngModel)]="messageContent"
+              (keydown.enter)="sendMessage()"/>
           </nz-input-group>
           <ng-template #suffixIconSearch>
             <i nz-icon type="icon:plane"></i>

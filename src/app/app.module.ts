@@ -10,6 +10,7 @@ import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { MessageItemComponent } from './components/message-item/message-item.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
+import { UsernameModalComponent } from './components/username-modal/username-modal.component';
 
 registerLocaleData(en);
 
@@ -17,8 +18,10 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     MessageItemComponent,
-    UserItemComponent
+    UserItemComponent,
+    UsernameModalComponent
   ],
+  entryComponents: [ UsernameModalComponent ],
   imports: [
     BrowserModule,
     NgZorroAntdModule,

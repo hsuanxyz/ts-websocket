@@ -27,7 +27,9 @@ export class WebSocketServer {
         const messageJSON = JSON.parse(message) as Message;
         switch (messageJSON.type) {
           case MessageType.JOINED:
-            this.addUser(messageJSON.data);
+            if (messageJSON.data) {
+              this.addUser(messageJSON.data);
+            }
             break;
           case MessageType.LEFT:
             this.removeUser(messageJSON.data);
@@ -51,7 +53,7 @@ export class WebSocketServer {
     try {
       this.wsServer.clients.forEach(client => {
         if (client !== ws && client.readyState === WebSocket.OPEN) {
-          this.send(ws, JSON.parse(message));
+          this.send(client, JSON.parse(message));
         }
       });
     } catch (e) {
