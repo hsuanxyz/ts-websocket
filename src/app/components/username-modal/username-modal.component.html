@@ -1,4 +1,4 @@
-<input nz-input placeholder="Username" [(ngModel)]="username" />
+<input nz-input placeholder="Username" [(ngModel)]="username" (keydown.enter)="confirm()"/>
 <div class="footer">
   <button nz-button nzType="primary" (click)="confirm()">Confirm</button>
   <button nz-button (click)="cancel()">Cancel</button>

@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { NzIconService, NzModalService } from 'ng-zorro-antd'
+import { filter } from 'rxjs/operators'
 import { UsernameModalComponent } from './components/username-modal/username-modal.component'
 import { MessageListener } from './core/message-listeners'
 import { MessageListenersManager } from './core/message-listeners-manager'
@@ -26,16 +27,10 @@ export class AppComponent extends MessageListenersManager implements OnInit {
               private nzModalService: NzModalService) {
     super(messageService);
     this.iconService.addIconLiteral('icon:plane', planeSvg);
-    this.messageService.connect();
   }
 
   ngOnInit(): void {
-
-  }
-
-  @HostListener('window:beforeunload')
-  left() {
-    this.messageService.send(Send.LEFT, this.username)
+    this.messageService.connect();
   }
 
   openUsernameModal(rename = false) {
@@ -45,7 +40,9 @@ export class AppComponent extends MessageListenersManager implements OnInit {
       nzFooter: null
     });
 
-    modalRef.afterClose.subscribe(username => {
+    modalRef.afterClose
+    .pipe(filter((username: string) => username.trim() !== ''))
+    .subscribe((username: string) => {
       if (rename) {
         this.rename(username)
       } else {
@@ -81,6 +78,11 @@ export class AppComponent extends MessageListenersManager implements OnInit {
       this.addMessage(message);
       this.messageContent = '';
     }
+  }
+
+  @HostListener('window:beforeunload')
+  leave() {
+    this.messageService.send<Send.LEAVE>(Send.LEAVE, this.username)
   }
 
   @MessageListener(Receive.CONNECT)

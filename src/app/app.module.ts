@@ -11,6 +11,7 @@ import en from '@angular/common/locales/en';
 import { MessageItemComponent } from './components/message-item/message-item.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { UsernameModalComponent } from './components/username-modal/username-modal.component';
+import { RelativeTimePipe } from './pipes/relative-time.pipe';
 
 registerLocaleData(en);
 
@@ -19,7 +20,8 @@ registerLocaleData(en);
     AppComponent,
     MessageItemComponent,
     UserItemComponent,
-    UsernameModalComponent
+    UsernameModalComponent,
+    RelativeTimePipe
   ],
   entryComponents: [ UsernameModalComponent ],
   imports: [

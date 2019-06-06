@@ -31,7 +31,7 @@ export class WebSocketServer {
               this.addUser(messageJSON.data);
             }
             break;
-          case MessageType.LEFT:
+          case MessageType.LEAVE:
             this.removeUser(messageJSON.data);
             break;
           case MessageType.RENAME:

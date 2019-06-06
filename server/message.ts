@@ -1,6 +1,6 @@
 export enum MessageType {
   JOINED = 'JOINED',
-  LEFT = 'LEFT',
+  LEAVE = 'LEAVE',
   RENAME = 'RENAME',
   MESSAGE = 'MESSAGE',
   GET_USER_LIST = 'GET_USER_LIST',

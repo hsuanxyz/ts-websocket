@@ -3,7 +3,7 @@
   <div class="user-info">
     <div class="info-username">
       <span class="username">{{username}}</span>
-      <span class="relative-item">11:00</span>
+      <span class="relative-item">{{lastMessage?.time | relativeTime}}</span>
     </div>
     <p class="info-message">{{lastMessage?.content}}</p>
   </div>

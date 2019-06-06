@@ -10,8 +10,8 @@ export enum Receive {
 
 export enum Send {
   JOINED = 'JOINED',
-  LEFT = 'LEFT',
-  RENAME = 'RENAME',
+  LEAVE = 'LEAVE',
+  RENAME  = 'RENAME',
   MESSAGE = 'MESSAGE',
   GET_USER_LIST = 'GET_USER_LIST'
 }
@@ -22,6 +22,13 @@ export interface ChatMessage {
   form: User;
   content: string;
   time: number;
+}
+
+type DataType<T extends (Send | Receive)> = T extends Send ? MessageSendData[Send] : MessageReceiveData[Receive];
+
+export interface MessageBody<T extends (Send | Receive)> {
+  type: T;
+  data: DataType<T>
 }
 
 export interface MessageReceiveData {
@@ -40,7 +47,7 @@ export interface MessageSendData {
   [Send.MESSAGE]: ChatMessage;
   [Send.GET_USER_LIST]: never;
   [Send.JOINED]: User;
-  [Send.LEFT]: User;
+  [Send.LEAVE]: User;
   [Send.RENAME]: {
     user: User;
     newName: User;
