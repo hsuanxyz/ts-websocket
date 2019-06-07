@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs'
-import { filter, map } from 'rxjs/operators'
-import { webSocket, WebSocketSubject } from 'rxjs/webSocket'
-import { SendArgumentsType } from '../core/message-ts-util'
-import { MessageBody, MessageReceiveData, Receive, Send } from '../interfaces/message'
+import { Observable, Subject } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { SendArgumentsType } from '../core/message-ts-util';
+import { MessageBody, MessageReceiveData, Receive, Send } from '../interfaces/message';
 
 @Injectable({
   providedIn: 'root'
@@ -19,14 +19,14 @@ export class MessageService {
     this.ws = webSocket({
       url: 'ws://localhost:8080/ws'
     });
-    this.ws.subscribe(data => this.received$.next(data as MessageBody<Receive>))
+    this.ws.subscribe(data => this.received$.next(data as MessageBody<Receive>));
   }
 
   receive<K extends Receive>(type: K): Observable<MessageReceiveData[K]> {
     return this.received$.pipe(
       filter(message => message.type === type),
       map(message => message.data)
-    ) as Observable<MessageReceiveData[K]>
+    ) as Observable<MessageReceiveData[K]>;
   }
 
   send<K extends Send>(...args: SendArgumentsType<K>) {

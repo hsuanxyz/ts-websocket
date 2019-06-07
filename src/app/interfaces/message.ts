@@ -21,13 +21,13 @@ type DataType<T extends (Send | Receive)> = T extends Send ? MessageSendData[Sen
 
 export interface MessageBody<T extends (Send | Receive)> {
   type: T;
-  data: DataType<T>
+  data: DataType<T>;
 }
 
 export interface MessageReceiveData {
   [Receive.CONNECT]: never;
   [Receive.USER_LIST]: User[];
-  [Receive.MESSAGE]: ChatMessage
+  [Receive.MESSAGE]: ChatMessage;
   [Receive.JOINED]: User;
   [Receive.LEAVE]: User;
   [Receive.RENAME]: Rename;
@@ -38,7 +38,7 @@ export interface MessageSendData {
   [Send.GET_USER_LIST]: never;
   [Send.JOINED]: User;
   [Send.LEAVE]: User;
-  [Send.RENAME]: Rename
+  [Send.RENAME]: Rename;
 }
 
 export type User = string;
