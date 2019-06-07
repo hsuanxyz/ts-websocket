@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NzModalRef } from 'ng-zorro-antd'
+import { Component, Input } from '@angular/core';
+import { NzModalRef } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-username-modal',

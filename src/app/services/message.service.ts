@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { SendArgumentsType } from '../core/message-ts-util';
-import { MessageBody, MessageReceiveData, Receive, Send } from '../interfaces/message';
+import { MessageBody, MessageReceiveData, MessageSendData, Receive, Send } from '../interfaces/message';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +38,7 @@ export class MessageService {
       }
     );
   }
+
+
 
 }
